@@ -1,0 +1,32 @@
+library(dplyr)
+library(stats)
+library(tidyverse)
+library(corrplot)
+library(skimr)
+
+
+user_scammer <- read.csv("~/Mutual/user_scammer.csv")
+
+str(user_scammer)
+glimpse(user_scammer)
+skim(user_scammer)
+
+head(user_scammer)
+tail(user_scammer)
+
+#Created new data frame 
+mydata = select(user_scammer, "id", "first_name", "last_name", "location", "gender", "age", "birthdate", "dating_interest",
+       "pref_age_low", "pref_age_high", "pref_search_radius", "pref_height_min", "pref_height_max", "p_ninja_mode")
+
+str(mydata)
+skim(mydata)
+summary(mydata)
+
+pref_search_rad = mydata$pref_search_radius
+hist(pref_search_rad)
+
+table(pref_search_rad)
+barplot(table(pref_search_rad))
+#Highest search raduis was 400 and 700
+
+write.csv(mydata, 'Cleaned_user_scammer.csv')
